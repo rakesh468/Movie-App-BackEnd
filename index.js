@@ -2,6 +2,7 @@ import express from "express";
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import { MoviesRouter } from "./routes/movies.js";
+import {UserRouter} from "./routes/users.js";
 
 dotenv.config();//dotenv configiration//
 
@@ -31,6 +32,7 @@ response.send("Hello World")
 })
 
 app.use("/movies",MoviesRouter)
+app.use("/users",UserRouter)
 
 app.listen(PORT,()=>console.log("APP running in PORT",PORT));
 
