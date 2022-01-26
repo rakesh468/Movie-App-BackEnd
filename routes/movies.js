@@ -6,7 +6,7 @@ import { auth } from "../middleware/auth.js";
 const router=express.Router()
 
 
-// To filter Movie By Rating using get method //
+// To filter Movie By Rating using get method /
 router
 .route("/")
 .get(async(request,response)=>{
