@@ -3,12 +3,15 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import { MoviesRouter } from "./routes/movies.js";
 import { UserRouter } from "./routes/users.js";
+import cors from "cors";
 
 dotenv.config(); //dotenv configiration//
 
 const app = express();
 
 const PORT = process.env.PORT; //PORT Number//
+
+app.use(cors()); //third party middleware used to access data//
 
 app.use(express.json()); //middleware to convert data into json format//
 
