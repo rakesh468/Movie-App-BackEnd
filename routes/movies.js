@@ -1,13 +1,15 @@
 import express from "express";
-import { GetmovieById, FilterMovie, CreateMovie, UpdateMovieById, DeleteMovieById } from "../helper.js";
+import { GetmovieById, FilterMovie, CreateMovie, UpdateMovieById, DeleteMovieById,Getmovies } from "../helper.js";
+import { auth } from "../middleware/auth.js";
 
 // replacing app to router //
 const router=express.Router()
 
 
-
 // To filter Movie By Rating using get method //
-router.get("/",async(request,response)=>{
+router
+.route("/")
+.get(async(request,response)=>{
     const filter=request.query;
     console.log(filter);
     if(filter.rating){
@@ -17,40 +19,41 @@ router.get("/",async(request,response)=>{
     response.send(filterrating);
     console.log(filterrating)
 })
-
-// Adding movies using POST Method //
-router.post("/",async(request,response)=>{
+.get(async(request,response)=>{
+    const data=await Getmovies()
+    response.send(data);
+})
+.post(async(request,response)=>{
     const data=request.body;
     const movie=await CreateMovie(data)
     response.send(movie)
    
-})
+})// Adding movies using POST Method //
 
 // To get movies by id using get method //
-router.get("/:id",async(request,response)=>{
+router
+.route("/:id")
+.get(auth,async(request,response)=>{
     const {id}=request.params;
     const result=await GetmovieById(id)
     response.send(result);
     console.log(result);
 })
-
-//Updating movies using PUT Method//
-router.put("/:id",async(request,response)=>{
-    const {id}=request.params;
+.put(async(request,response)=>{
+    const { id }=request.params;
     const data=request.body;
     const result=await UpdateMovieById(id, data);
-    response.send(result)
-   
-})
+    const movie= await GetmovieById(id)
+    response.send(movie);
+   })//Edit movies using PUT Method//
 
-// Deleteing movies using DELETE Method //
-router.delete("/:id",async(request,response)=>{
+.delete(async(request,response)=>{
     const{id}=request.params;
     const result=await DeleteMovieById(id)
     result.deletedCount > 0
     ? response.send(result)
     : response.status(404).send({message:"No matching movie found"})
    
-})
+})// Deleteing movies using DELETE Method //
 
 export const MoviesRouter=router;

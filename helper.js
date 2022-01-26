@@ -40,6 +40,9 @@ async function Getuserbyname(email) {
     .findOne({ email: email });
 }
 
+async function Getmovies(){
+  return client.db("movieapp").collection("movies").find().toArray();
+}
 async function genpassword(password) {
   const no_of_round = 10;
   const salt = await bcrypt.genSalt(no_of_round);
@@ -58,4 +61,5 @@ export {
   genpassword,
   CreateUser,
   Getuserbyname,
+  Getmovies
 };
