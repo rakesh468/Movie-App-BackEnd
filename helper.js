@@ -11,7 +11,7 @@ async function DeleteMovieById(id) {
 async function UpdateMovieById(id, data) {
   return await client
     .db("movieapp")
-    .collection("movie")
+    .collection("movies")
     .updateOne({ _id: ObjectId(id) }, { $set: data });
 }
 async function CreateMovie(data) {
