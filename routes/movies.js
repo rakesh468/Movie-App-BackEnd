@@ -19,7 +19,7 @@ router
     response.send(filterrating);
     console.log(filterrating)
 })
-.get(async(request,response)=>{
+.get(auth,async(request,response)=>{
     const data=await Getmovies()
     response.send(data);
 })
