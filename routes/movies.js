@@ -9,7 +9,7 @@ const router=express.Router()
 // To filter Movie By Rating using get method /
 router
 .route("/")
-.get(async(request,response)=>{
+.get(auth,async(request,response)=>{
     const filter=request.query;
     console.log(filter);
     if(filter.rating){
