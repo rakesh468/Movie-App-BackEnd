@@ -15,7 +15,7 @@ async function UpdateMovieById(id, data) {
     .updateOne({ _id: ObjectId(id) }, { $set: data });
 }
 async function CreateMovie(data) {
-  return await client.db("movieapp").collection("movies").insertMany(data);
+  return await client.db("movieapp").collection("movies").insertOne(data);
 }
 async function FilterMovie(filter) {
   return await client
