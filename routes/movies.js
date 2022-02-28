@@ -39,7 +39,7 @@ router
     response.send(result);
     console.log(result);
 })
-.put(async(request,response)=>{
+.put(auth,async(request,response)=>{
     const { id }=request.params;
     const data=request.body;
     const result=await UpdateMovieById(id, data);
