@@ -23,7 +23,7 @@ router
     const data=await Getmovies()
     response.send(data);
 })
-.post(async(request,response)=>{
+.post(auth,async(request,response)=>{
     const data=request.body;
     const movie=await CreateMovie(data)
     response.send(movie)
