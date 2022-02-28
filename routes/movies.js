@@ -33,7 +33,7 @@ router
 // To get movies by id using get method //
 router
 .route("/:id")
-.get(async(request,response)=>{
+.get(auth,async(request,response)=>{
     const {id}=request.params;
     const result=await GetmovieById(id)
     response.send(result);
