@@ -47,7 +47,7 @@ router
     response.send(movie);
    })//Edit movies using PUT Method//
 
-.delete(async(request,response)=>{
+.delete(auth,async(request,response)=>{
     const{id}=request.params;
     const result=await DeleteMovieById(id)
     result.deletedCount > 0
